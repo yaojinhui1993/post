@@ -18,6 +18,11 @@ export default new Router({
       component: () => import('./views/Post/Index.vue')
     },
     {
+      path: '/post/create',
+      name: 'post.create',
+      component: () => import('./views/Post/Create.vue')
+    },
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting

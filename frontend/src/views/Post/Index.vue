@@ -1,6 +1,13 @@
 <template>
 <v-container fluid fill-height>
-  <v-layout justify-center align-center>
+
+  <v-layout justify-center align-center row wrap>
+    <v-flex md12>
+      <div class="text-xs-center">
+        <v-btn round color="primary" to="/post/create" dark>Create Post</v-btn>
+      </div>
+    </v-flex>
+
     <v-flex md8>
       <v-data-table
         :headers="headers"
