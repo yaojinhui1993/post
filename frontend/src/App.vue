@@ -8,7 +8,7 @@
   >
     <v-list dense>
       <template v-for="item in items">
-        <v-list-tile :key="item.text" @click="" :to="item.link">
+        <v-list-tile :key="item.text" :to="item.link">
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
@@ -48,9 +48,24 @@
       <v-icon>notifications</v-icon>
     </v-btn>
   </v-toolbar>
-  <v-content>
+  <v-content >
     <router-view></router-view>
   </v-content>
+
+  <v-snackbar
+    :value="!! message"
+    :timeout="3000"
+    @input="(e) => updateSnackbarMessage(e)"
+  >
+    {{ message }}
+    <v-btn
+      color="pink"
+      flat
+      @click="updateSnackbarMessage('')"
+    >
+      Close
+    </v-btn>
+  </v-snackbar>
 </v-app>
 </template>
 
@@ -63,6 +78,17 @@ export default {
       { icon: "dashboard", text: "home", link: "/" },
       { icon: "contacts", text: "posts", link: "/post" }
     ]
-  })
+  }),
+
+  computed: {
+    message() {
+      return this.$store.state.snackbarMessage;
+    }
+  },
+  methods: {
+    updateSnackbarMessage(message) {
+      this.$store.commit("updateSnackbarMessage", message);
+    }
+  }
 };
 </script>

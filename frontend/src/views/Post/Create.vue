@@ -52,8 +52,9 @@ export default {
           title: this.title,
           body: this.body
         })).data;
-        alert("success");
-        console.log(response);
+
+        this.$store.commit("updateSnackbarMessage", "Created Post");
+
         this.$router.push({ name: "post" });
       }
     },
