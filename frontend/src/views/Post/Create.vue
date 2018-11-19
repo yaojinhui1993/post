@@ -48,10 +48,10 @@ export default {
   methods: {
     async submit() {
       if (this.$refs.form.validate()) {
-        const response = (await axios.post("/api/post", {
+        await this.axios.post("/api/post", {
           title: this.title,
           body: this.body
-        })).data;
+        });
 
         this.$store.commit("updateSnackbarMessage", "Created Post");
 

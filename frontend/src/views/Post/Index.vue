@@ -38,7 +38,6 @@
 
 
   <v-dialog v-model="dialog" max-width="500px">
-    <v-btn slot="activator" color="primary" dark class="mb-2">Edit item</v-btn>
     <v-card>
       <v-card-title>
         <span class="headline">Edit Item</span>
@@ -122,7 +121,7 @@ export default {
       this.loading = true;
 
       const { page } = this.pagination;
-      this.posts = (await axios("/api/post", {
+      this.posts = (await this.axios("/api/post", {
         params: { page }
       })).data;
 
@@ -139,7 +138,7 @@ export default {
     async deleteItem(item) {
       this.dialog = false;
 
-      await axios.delete(`/api/post/${item.id}`, {});
+      await this.axios.delete(`/api/post/${item.id}`, {});
 
       this.$store.commit("updateSnackbarMessage", "Deleted Success!");
 
@@ -152,7 +151,7 @@ export default {
     },
 
     async save() {
-      await axios.patch(`/api/post/${this.editedItem.id}`, {
+      await this.axios.patch(`/api/post/${this.editedItem.id}`, {
         title: this.editedItem.title,
         body: this.editedItem.body
       });
