@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Http\Request;
 
 /*
@@ -15,6 +16,25 @@ use Illuminate\Http\Request;
 
 Route::resource('/post', 'PostController');
 
+Route::get('/login', function () {
+    // auth('api')->login($user = User::first());
+
+    // return $user;
+    // return auth()->user();
+    // Remember forever?
+    auth('api')->attempt(['email' => 'john@example.com', 'password' => 'password'], true);
+});
+Route::get('/logout', function () {
+    auth('api')->logout();
+});
+
+Route::get('/isLogin', function (Request $request) {
+    // return auth('api')->user();
+    return auth('api')->user();
+});
+
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+    // return $request->user();
+    return auth()->user();
 });
