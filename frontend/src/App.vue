@@ -11,7 +11,7 @@
   <template v-else>
     <v-app id="inspire" class="app">
       <v-content>
-        <!-- <app-drawer></app-drawer> -->
+        <app-drawer class="app-drawer"></app-drawer>
         <div class="page-wrapper">
           <router-view></router-view>
         </div>
@@ -30,10 +30,12 @@
 </template>
 
 <script>
+import AppDrawer from "@/components/AppDrawer";
 import AppFab from "@/components/AppFab";
 
 export default {
   components: {
+    AppDrawer,
     AppFab
   }
 };
