@@ -10,7 +10,6 @@ Vue.config.productionTip = false
 
 window.axios = axios;
 
-
 new Vue({
   router,
   store,
