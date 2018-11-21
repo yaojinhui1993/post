@@ -10,20 +10,26 @@
 
   <template v-else>
     <v-app id="inspire" class="app">
+      <app-drawer class="app-drawer"></app-drawer>
+      <app-toolbar class="app--toolbar"></app-toolbar>
       <v-content>
-        <app-drawer class="app-drawer"></app-drawer>
-        <app-toolbar class="app--toolbar"></app-toolbar>
+        <!-- Page Header -->
+        <page-header v-if="$route.meta.breadcrumb"></page-header>
+
+        <!-- Content -->
         <div class="page-wrapper">
           <router-view></router-view>
         </div>
 
+        <!-- Page Footer -->
+        <v-footer height="auto" class="white pa-3 app--footer">
+          <span class="caption">isocked.com Design &copy; {{ new Date().getFullYear() }}</span>
+          <v-spacer></v-spacer>
+          <span class="caption mr-1"> Make With Love </span> <v-icon color="pink" small>favorite</v-icon>
+        </v-footer>
       </v-content>
 
-      <v-footer height="auto" class="white pa-3 app--footer">
-        <span class="caption">isocked.com Design &copy; {{ new Date().getFullYear() }}</span>
-        <v-spacer></v-spacer>
-        <span class="caption mr-1"> Make With Love </span> <v-icon color="pink" small>favorite</v-icon>
-      </v-footer>
+      <!-- Go to top -->
       <app-fab></app-fab>
     </v-app>
   </template>
@@ -34,12 +40,15 @@
 import AppDrawer from "@/components/AppDrawer";
 import AppToolbar from "@/components/AppToolbar";
 import AppFab from "@/components/AppFab";
+import PageHeader from "@/components/PageHeader";
+import AppEvents from "@/event";
 
 export default {
   components: {
     AppDrawer,
     AppFab,
-    AppToolbar
+    AppToolbar,
+    PageHeader
   },
 
   data: () => ({
@@ -53,7 +62,6 @@ export default {
   }),
 
   created() {
-    const AppEvents = [];
     AppEvents.forEach(item => {
       this.$on(item.name, item.callback);
     });

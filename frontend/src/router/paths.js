@@ -2,7 +2,7 @@ export default [
   {
     path: '*',
     meta: {
-      public: true,
+      public: true, // Display full page.
     },
     redirect: {
       path: '/404'
