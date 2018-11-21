@@ -1,94 +1,52 @@
 <template>
-<v-app id="inspire">
-  <v-navigation-drawer
-    :clipped="$vuetify.breakpoint.lgAndUp"
-    v-model="drawer"
-    fixed
-    app
-  >
-    <v-list dense>
-      <template v-for="item in items">
-        <v-list-tile :key="item.text" :to="item.link">
-          <v-list-tile-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>
-              {{ item.text }}
-            </v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </template>
-    </v-list>
-  </v-navigation-drawer>
-  <v-toolbar
-    :clipped-left="$vuetify.breakpoint.lgAndUp"
-    color="blue darken-3"
-    dark
-    app
-    fixed
-  >
-    <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <span class="hidden-sm-and-down">Google Contacts</span>
-    </v-toolbar-title>
-    <v-text-field
-      flat
-      solo-inverted
-      hide-details
-      prepend-inner-icon="search"
-      label="Search"
-      class="hidden-sm-and-down"
-    ></v-text-field>
-    <v-spacer></v-spacer>
-    <v-btn icon>
-      <v-icon>apps</v-icon>
-    </v-btn>
-    <v-btn icon>
-      <v-icon>notifications</v-icon>
-    </v-btn>
-  </v-toolbar>
-  <v-content >
-    <router-view></router-view>
-  </v-content>
+<div id="appRoot">
+  <template v-if="$route.meta.public">
+    <transition>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
+    </transition>
+  </template>
 
-  <v-snackbar
-    :value="!! message"
-    :timeout="3000"
-    @input="(e) => updateSnackbarMessage(e)"
-  >
-    {{ message }}
-    <v-btn
-      color="pink"
-      flat
-      @click="updateSnackbarMessage('')"
-    >
-      Close
-    </v-btn>
-  </v-snackbar>
-</v-app>
+  <template v-else>
+    <v-app id="inspire" class="app">
+      <v-content>
+        <!-- <app-drawer></app-drawer> -->
+        <div class="page-wrapper">
+          <router-view></router-view>
+        </div>
+
+        <v-footer height="auto" class="white pa-3 app--footer">
+          <span class="caption">isocked.com Design &copy; {{ new Date().getFullYear() }}</span>
+          <v-spacer></v-spacer>
+          <span class="caption mr-1"> Make With Love </span> <v-icon color="pink" small>favorite</v-icon>
+        </v-footer>
+      </v-content>
+
+      <app-fab></app-fab>
+    </v-app>
+  </template>
+</div>
 </template>
 
 <script>
-export default {
-  data: () => ({
-    dialog: false,
-    drawer: null,
-    items: [
-      { icon: "dashboard", text: "home", link: "/" },
-      { icon: "contacts", text: "posts", link: "/post" }
-    ]
-  }),
+import AppFab from "@/components/AppFab";
 
-  computed: {
-    message() {
-      return this.$store.state.snackbarMessage;
-    }
-  },
-  methods: {
-    updateSnackbarMessage(message) {
-      this.$store.commit("updateSnackbarMessage", message);
-    }
+export default {
+  components: {
+    AppFab
   }
 };
 </script>
+
+<style lang="stylus" scoped>
+.seting-fab {
+  top: 50% !important;
+  right: 0;
+  border-radius: 0;
+}
+
+.page-wrapper {
+  min-height: calc(100vh - 64px - 50px - 81px);
+}
+</style>

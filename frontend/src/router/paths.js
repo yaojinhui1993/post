@@ -1,27 +1,33 @@
-import Home from '@/views/Home.vue';
-
 export default [
-    {
-      path: '/',
-      name: 'home',
-      component: Home
+  {
+    path: '*',
+    meta: {
+      public: true,
     },
-    {
-      path: '/post',
-      name: 'post',
-      component: () => import('@/views/Post/Index.vue')
-    },
-    {
-      path: '/post/create',
-      name: 'post.create',
-      component: () => import('@/views/Post/Create.vue')
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ '@/views/About.vue')
+    redirect: {
+      path: '/404'
     }
+  },
+  {
+    path: '/404',
+    meta: {
+      public: true,
+    },
+    name: 'NotFound',
+    component: () => import('@/views/NotFound.vue')
+  },
+  {
+    path: '/',
+    meta: {},
+    name: 'Root',
+    redirect: {
+      name: 'Dashboard'
+    }
+  },
+  {
+    path: '/dashboard',
+    meta: { breadcrumb: true },
+    name: 'Dashboard',
+    component: () => import('@/views/Dashboard.vue')
+  }
 ]
