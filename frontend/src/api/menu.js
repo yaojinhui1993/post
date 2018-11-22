@@ -26,19 +26,19 @@ const Menu =  [
   //   name: 'Media',
   //   icon: 'perm_media',
   // },
-  // {
-  //   title: 'Widgets',
-  //   group: 'widgets',
-  //   component: 'widgets',
-  //   icon: 'widgets',
-  //   items: [
-  //     { name: 'social', title: 'Social', component: 'components/social' },
-  //     { name: 'statistic', title: 'Statistic', badge: 'new', component: 'components/statistic' },
-  //     { name: 'chart', title: 'Chart', component: 'components/chart' },
-  //     { name: 'list', title: 'List', component: 'components/widget-list' },
-  //     // { name: 'post', title: 'Post', component: 'components/widget-post' },
-  //   ]
-  // },
+  {
+    title: 'Widgets',
+    group: 'widgets',
+    component: 'widgets',
+    icon: 'widgets',
+    items: [
+      // { name: 'social', title: 'Social', component: 'components/social' },
+      // { name: 'statistic', title: 'Statistic', badge: 'new', component: 'components/statistic' },
+      { name: 'chart', title: 'Chart', component: 'components/chart' },
+      // { name: 'list', title: 'List', component: 'components/widget-list' },
+      // { name: 'post', title: 'Post', component: 'components/widget-post' },
+    ]
+  },
   // { header: 'UI Elements' },
   // {
   //   title: 'General',

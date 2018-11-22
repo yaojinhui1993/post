@@ -29,5 +29,16 @@ export default [
     meta: { breadcrumb: true },
     name: 'Dashboard',
     component: () => import('@/views/Dashboard.vue')
-  }
+  },
+
+  {
+    path: '/widgets/chart',
+    meta: { breadcrumb: true },
+    name: 'components/chart',
+    component: () => import(
+      /* webpackChunkName: "routes" */
+      /* webpackMode: "lazy-once" */
+      `@/views/widgets/Chart.vue`
+    )
+  },
 ]
