@@ -61,60 +61,68 @@ export default {
   },
 
   watch: {
-    type() {
-      switch (this.type) {
-        case "bar":
-          this.defaultOption.push(["series[0].type", "bar"]);
-          this.defaultOption.push(["series[0].barWidth", "50%"]);
-          // add shadow series
-          // this.defaultOption.push(['series[1].type', 'bar']);
-          break;
-        case "stack-bar":
-          // set stacked bar
-          // this.defaultOption.push(['series[0].data', StackBarData]);
-          this.defaultOption.push(["series[0].type", "bar"]);
-          this.defaultOption.push([
-            "series[0].itemStyle.normar.color",
-            "rgba(0,0,0,0.05)"
-          ]);
-          this.defaultOption.push(["series[0].barGap", "-100%"]);
-          // set main series
-          // this.defaultOption.push(['series[1].data', StackData]);
-          this.defaultOption.push(["series[1].type", "bar"]);
-          break;
-        case "area":
-          this.defaultOption.push(["series[0].type", "line"]);
-          this.defaultOption.push(["series[0].smooth", true]);
-          this.defaultOption.push(["xAxis.boundaryGap", false]);
-          this.defaultOption.push(["series[0].areaStyle", {}]);
-          if (this.gradient) {
+    type: {
+      handler: function() {
+        switch (this.type) {
+          case "bar":
+            this.defaultOption.push(["series[0].type", "bar"]);
+            this.defaultOption.push(["series[0].barWidth", "50%"]);
+            // add shadow series
+            // this.defaultOption.push(['series[1].type', 'bar']);
+            break;
+          case "stack-bar":
+            // set stacked bar
+            // this.defaultOption.push(['series[0].data', StackBarData]);
+            this.defaultOption.push(["series[0].type", "bar"]);
             this.defaultOption.push([
-              "series[0].areaStyle",
-              {
-                normal: {
-                  color: new window.echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                    {
-                      offset: 0,
-                      color: this.chartColor[0]
-                    },
-                    {
-                      offset: 1,
-                      color: this.chartColor[1]
-                    }
-                  ])
-                }
-              }
+              "series[0].itemStyle.normar.color",
+              "rgba(0,0,0,0.05)"
             ]);
-          }
+            this.defaultOption.push(["series[0].barGap", "-100%"]);
+            // set main series
+            // this.defaultOption.push(['series[1].data', StackData]);
+            this.defaultOption.push(["series[1].type", "bar"]);
+            break;
+          case "area":
+            this.defaultOption.push(["series[0].type", "line"]);
+            this.defaultOption.push(["series[0].smooth", true]);
+            this.defaultOption.push(["xAxis.boundaryGap", false]);
+            this.defaultOption.push(["series[0].areaStyle", {}]);
+            if (this.gradient) {
+              this.defaultOption.push([
+                "series[0].areaStyle",
+                {
+                  normal: {
+                    color: new window.echarts.graphic.LinearGradient(
+                      0,
+                      0,
+                      0,
+                      1,
+                      [
+                        {
+                          offset: 0,
+                          color: this.chartColor[0]
+                        },
+                        {
+                          offset: 1,
+                          color: this.chartColor[1]
+                        }
+                      ]
+                    )
+                  }
+                }
+              ]);
+            }
 
-          break;
-        default:
-          // line
-          this.defaultOption.push(["series[0].smooth", true]);
-          this.defaultOption.push(["xAxis.boundaryGap", false]);
-          break;
-      }
-      return this.defaultOption;
+            break;
+          default:
+            // line
+            this.defaultOption.push(["series[0].smooth", true]);
+            this.defaultOption.push(["xAxis.boundaryGap", false]);
+            break;
+        }
+      },
+      immediate: true
     }
   },
 

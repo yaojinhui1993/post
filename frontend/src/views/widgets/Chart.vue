@@ -312,7 +312,7 @@
               Visit
             </v-tab>
             <v-tabs-items v-model="selectedTab">
-              <v-tab-item value="tab-1" class="d-block">
+              <v-tab-item value="tab-1" key="tab-1">
                 <v-card>
                   <e-chart
                   :path-option="[
@@ -327,7 +327,7 @@
                   </e-chart>
                 </v-card>
               </v-tab-item>
-              <v-tab-item value="tab-2">
+              <v-tab-item value="tab-2" key="tab-2">
                 <v-card>
                   <e-chart
                   :path-option="[

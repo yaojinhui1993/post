@@ -8,7 +8,7 @@
         </div>
         <div class="chart">
           <e-chart
-            :path-option="computeChartOption"
+            :path-option="defaultOption"
             height="68px"
             width="100%"
             >
@@ -48,20 +48,23 @@ export default {
     };
   },
 
-  computed: {
-    computeChartOption() {
-      switch (this.type) {
-        case "bar":
-          this.defaultOption.push(["series[0].type", "bar"]);
-          break;
-        case "area":
-          this.defaultOption.push(["series[0].type", "line"]);
-          this.defaultOption.push(["series[0].areaStyle", {}]);
-          break;
-        default:
-          break;
-      }
-      return this.defaultOption;
+  watch: {
+    type: {
+      handler: function() {
+        switch (this.type) {
+          case "bar":
+            this.defaultOption.push(["series[0].type", "bar"]);
+            break;
+          case "area":
+            this.defaultOption.push(["series[0].type", "line"]);
+            this.defaultOption.push(["series[0].areaStyle", {}]);
+            break;
+          default:
+            break;
+        }
+      },
+      // deep: true,
+      immediate: true
     }
   }
 };
